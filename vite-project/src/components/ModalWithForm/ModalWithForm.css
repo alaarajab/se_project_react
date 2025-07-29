@@ -8,6 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+}
+.modal_opened {
+  visibility: visible;
 }
 .modal__close {
   position: absolute;
