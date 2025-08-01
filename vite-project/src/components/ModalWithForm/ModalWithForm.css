@@ -26,6 +26,7 @@
   max-width: 496px;
   box-sizing: border-box;
   width: 100%;
+  border-radius: 16px;
 }
 .modal__form {
   display: flex;
