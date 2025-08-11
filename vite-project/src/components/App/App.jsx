@@ -183,7 +183,7 @@ function App() {
         buttonText="Add garment"
         activeModal={activeModal}
         onClose={closeActiveModal}
-        isSubmitDisabled={!isFormValid} // ✅ pass validation state
+        isSubmitDisabled={!isFormValid}
       >
         <label htmlFor="name" className="modal__label">
           Name{" "}
