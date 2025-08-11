@@ -1,6 +1,22 @@
+.modal {
+  border-radius: 16px;
+}
+
+.modal__content {
+  position: relative; /* anchor close button */
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-radius: 16px;
+}
+
 .modal__image {
   width: 100%;
+  display: block;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
+
 .modal__close {
   background: none;
   border: none;
@@ -8,9 +24,30 @@
   position: absolute;
   top: 8px;
   right: 8px;
+  z-index: 2;
 }
 
 .modal__close-icon {
   width: 20px;
   height: 20px;
+  padding-top: 24px;
+  padding-right: 24px;
+}
+
+/* Footer styling so it's clearly separate from the image */
+.modal__footer {
+  padding-bottom: 32px;
+  padding-left: 32px;
+  background: #fff; /* or modal background color */
+  /*border-radius: 16px;*/
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+.modal__caption {
+  font-size: 20px;
 }

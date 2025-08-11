@@ -1,5 +1,5 @@
 import "./ItemModal.css";
-import closeIcon from "../../assets/closeIcon.png";
+import closeIcon from "../../assets/closeIcon_white.png";
 
 function ItemModal({ activeModal, onClose, card }) {
   return (
@@ -11,7 +11,7 @@ function ItemModal({ activeModal, onClose, card }) {
 
         <img src={card.link} alt="" className="modal__image" />
         <div className="modal__footer">
-          <h2 className="modal__caption"></h2>
+          <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>
         </div>
       </div>

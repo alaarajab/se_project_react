@@ -6,3 +6,18 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+.modal__label_type_radio {
+  color: #00000080; /* default gray */
+  cursor: pointer;
+}
+
+/* Change text color when its radio is selected */
+.modal__label_type_radio:has(.modal__radio-input:checked) {
+  color: #000;
+}
+.modal__error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
