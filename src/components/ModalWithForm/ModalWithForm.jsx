@@ -1,25 +1,3 @@
-/*import "./ModalWithForm.css";
-import closeIcon from "../../assets/closeIcon_gray.png";
-
-function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
-  return (
-    <div className={`modal ${activeModal === "add-garment" && "modal_opened"}`}>
-      <div className="modal__content_form">
-        <h2 className="modal__title">{title}</h2>
-        <button onClick={onClose} type="button" className="modal__close">
-          <img src={closeIcon} alt="Close" className="modal__close-icoForm" />
-        </button>
-        <form className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
-export default ModalWithForm;*/
 import "./ModalWithForm.css";
 import closeIcon from "../../assets/closeIcon_gray.png";
 
@@ -30,15 +8,18 @@ function ModalWithForm({
   activeModal,
   onClose,
   isSubmitDisabled,
+  onSubmit, // include onSubmit prop
 }) {
   return (
-    <div className={`modal ${activeModal === "add-garment" && "modal_opened"}`}>
+    <div
+      className={`modal ${activeModal === "add-garment" ? "modal_opened" : ""}`}
+    >
       <div className="modal__content_form">
         <h2 className="modal__title">{title}</h2>
         <button onClick={onClose} type="button" className="modal__close">
           <img src={closeIcon} alt="Close" className="modal__close-icoForm" />
         </button>
-        <form className="modal__form">
+        <form className="modal__form" onSubmit={onSubmit}>
           {children}
           <button
             type="submit"
@@ -54,4 +35,5 @@ function ModalWithForm({
     </div>
   );
 }
+
 export default ModalWithForm;

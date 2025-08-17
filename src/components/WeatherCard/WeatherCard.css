@@ -18,7 +18,7 @@
   font-weight: 700;
   font-style: Bold;
 }
-.weater-card__image {
+.weather-card__image {
   object-fit: cover;
   object-position: right top;
   width: 100%;
