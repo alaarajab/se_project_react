@@ -20,7 +20,7 @@ function App() {
   });
 
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
-  const [lastAddedItem, setLastAddedItem] = useState(null); // track last added
+  const [lastAddedItem, setLastAddedItem] = useState(null);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -58,7 +58,7 @@ function App() {
       weather,
     };
     setClothingItems([newItem, ...clothingItems]);
-    setLastAddedItem(newItem); // track last added
+    setLastAddedItem(newItem);
     console.log("Updated clothingItems:", [newItem, ...clothingItems]);
     closeActiveModal();
     setName("");
