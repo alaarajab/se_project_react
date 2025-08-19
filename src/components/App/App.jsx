@@ -65,6 +65,21 @@ function App() {
     setImageUrl("");
     setWeather("");
   };
+  useEffect(() => {
+    if (!activeModal) return; // don’t attach if no modal is open
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -91,7 +106,7 @@ function App() {
       <ModalWithForm
         title="New garment"
         buttonText="Add garment"
-        activeModal={activeModal}
+        isOpen={activeModal === "add-garment"}
         onClose={closeActiveModal}
         isSubmitDisabled={!isFormValid}
         onSubmit={handleAddGarmentSubmit}
