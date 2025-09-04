@@ -1,41 +1,54 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* separates left and right */
   padding: 32px 0 28px;
 }
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .header__logo {
   margin-right: 24px;
 }
+
 .header__date-and-location {
   margin: 0;
   font-family: Cabinet Grotesk;
   font-weight: bold;
-  font-style: normal;
   font-size: 20px;
   line-height: 24px;
 }
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* space between ToggleSwitch, button, and user */
+}
+
 .header__add-clothes-btn {
-  /*margin-left: auto;
-  margin-right: 20px;*/
-  margin: 0 20px 0 auto;
   font-family: Cabinet Grotesk;
   font-weight: 700;
-  font-style: Bold;
   font-size: 20px;
   line-height: 24px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
+
 .header__user-container {
   display: flex;
   align-items: center;
   gap: 12px;
 }
+
 .header__username {
   margin: 0;
   font-family: Cabinet Grotesk;
   font-weight: 700;
-  font-style: Bold;
   font-size: 20px;
   line-height: 100%;
 }
