@@ -8,7 +8,7 @@ import {
 } from "../../utils/constants";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
@@ -116,76 +116,21 @@ function App() {
           <Footer />
         </div>
 
-        <ModalWithForm
-          title="New garment"
-          buttonText="Add garment"
+        <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           isSubmitDisabled={!isFormValid}
           onSubmit={handleAddGarmentSubmit}
-        >
-          <label htmlFor="name" className="modal__label">
-            Name
-            <input
-              type="text"
-              className="modal__input"
-              id="name"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-                setErrors((prev) => ({ ...prev, name: "" }));
-              }}
-            />
-            {errors.name && <span className="modal__error">{errors.name}</span>}
-          </label>
-
-          <label htmlFor="imageUrl" className="modal__label">
-            Image
-            <input
-              type="text"
-              className="modal__input"
-              id="imageUrl"
-              placeholder="Image URL"
-              value={imageUrl}
-              onChange={(e) => {
-                setImageUrl(e.target.value);
-                if (!isValidImageUrl(e.target.value)) {
-                  setErrors((prev) => ({
-                    ...prev,
-                    imageUrl: "This is not a valid image link",
-                  }));
-                } else {
-                  setErrors((prev) => ({ ...prev, imageUrl: "" }));
-                }
-              }}
-            />
-            {errors.imageUrl && (
-              <span className="modal__error">{errors.imageUrl}</span>
-            )}
-          </label>
-
-          <fieldset className="modal__radio-buttons">
-            <legend className="modal__legend">Select the weather type:</legend>
-            {["hot", "warm", "cold"].map((type) => (
-              <label
-                key={type}
-                htmlFor={type}
-                className="modal__label modal__label_type_radio"
-              >
-                <input
-                  id={type}
-                  type="radio"
-                  name="weather"
-                  className="modal__radio-input"
-                  checked={weather === type}
-                  onChange={() => setWeather(type)}
-                />
-                {type.charAt(0).toUpperCase() + type.slice(1)}
-              </label>
-            ))}
-          </fieldset>
-        </ModalWithForm>
+          name={name}
+          setName={setName}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          weather={weather}
+          setWeather={setWeather}
+          errors={errors}
+          setErrors={setErrors}
+          isValidImageUrl={isValidImageUrl}
+        ></AddItemModal>
 
         <ItemModal
           activeModal={activeModal}
