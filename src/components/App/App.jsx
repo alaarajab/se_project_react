@@ -46,7 +46,7 @@ function App() {
   };
 
   // ✅ Add item handler passed to AddItemModal
-  const handleAddItem = (values) => {
+  /*const handleAddItem = (values) => {
     const newItem = {
       id: Date.now(),
       name: values.name,
@@ -56,6 +56,38 @@ function App() {
     setClothingItems([newItem, ...clothingItems]);
     setLastAddedItem(newItem);
     closeActiveModal();
+  };*/
+  const handleAddItem = (values) => {
+    const newItem = {
+      id: Date.now(),
+      name: values.name,
+      link: values.imageUrl,
+      weather: values.type,
+    };
+
+    // Example: send POST request to your API
+    fetch("http://localhost:3000/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          return Promise.reject(`Error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((savedItem) => {
+        // ✅ Update UI with API response
+        setClothingItems([savedItem, ...clothingItems]);
+        setLastAddedItem(savedItem);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error("Failed to add item:", err);
+      });
   };
 
   useEffect(() => {
