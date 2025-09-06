@@ -3,12 +3,13 @@ import closeIcon from "../../assets/closeIcon_gray.png";
 
 function ModalWithForm({
   children,
-  buttonText,
+  name,
+  buttonText = "Save",
   title,
   isOpen,
   onClose,
-  isSubmitDisabled,
   onSubmit,
+  isSubmitDisabled = false,
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>

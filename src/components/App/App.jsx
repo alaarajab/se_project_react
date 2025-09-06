@@ -29,22 +29,8 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
-    currentTemperatureUnit === "F"
-      ? setCurrentTemperatureUnit("C")
-      : setCurrentTemperatureUnit("F");
+    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
   };
-
-  // Form states
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
-  const [errors, setErrors] = useState({ name: "", imageUrl: "" });
-
-  const isValidImageUrl = (url) =>
-    /^https?:\/\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(url);
-
-  const isFormValid =
-    name.trim() !== "" && isValidImageUrl(imageUrl) && weather !== "";
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -59,24 +45,21 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddGarmentSubmit = (e) => {
-    e.preventDefault();
+  // ✅ Add item handler passed to AddItemModal
+  const handleAddItem = (values) => {
     const newItem = {
       id: Date.now(),
-      name,
-      link: imageUrl,
-      weather,
+      name: values.name,
+      link: values.imageUrl,
+      weather: values.type,
     };
     setClothingItems([newItem, ...clothingItems]);
     setLastAddedItem(newItem);
-    console.log("Updated clothingItems:", [newItem, ...clothingItems]);
     closeActiveModal();
-    setName("");
-    setImageUrl("");
-    setWeather("");
   };
+
   useEffect(() => {
-    if (!activeModal) return; // don’t attach if no modal is open
+    if (!activeModal) return;
 
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
@@ -85,18 +68,12 @@ function App() {
     };
 
     document.addEventListener("keydown", handleEscClose);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
+    return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
-      .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
-      })
+      .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
 
@@ -119,18 +96,8 @@ function App() {
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
-          isSubmitDisabled={!isFormValid}
-          onSubmit={handleAddGarmentSubmit}
-          name={name}
-          setName={setName}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-          weather={weather}
-          setWeather={setWeather}
-          errors={errors}
-          setErrors={setErrors}
-          isValidImageUrl={isValidImageUrl}
-        ></AddItemModal>
+          onAddItem={handleAddItem} // ✅ Pass function here
+        />
 
         <ItemModal
           activeModal={activeModal}
