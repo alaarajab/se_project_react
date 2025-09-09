@@ -13,7 +13,6 @@ export const addItem = async (item) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-    g,
   });
 
   if (!res.ok) throw new Error(`Error adding item: ${res.status}`);

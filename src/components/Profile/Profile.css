@@ -4,10 +4,10 @@
   gap: 116px;
   align-items: flex-start;
 }
-.Profile__sidebar {
+.profile__sidebar {
   flex: 0 0 200px; /* Fixed width for sidebar */
 }
 
-.Profile__clothing-items {
+.profile__clothing-items {
   flex: 1; /* Take remaining space for clothing items */
 }

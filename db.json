@@ -101,6 +101,18 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "pp",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "warm",
+      "_id": 17
+    },
+    {
+      "name": "ffff",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "hot",
+      "_id": 18
     }
   ]
 }

@@ -34,6 +34,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       <label htmlFor="name" className="modal__label">
         Name
         <input
+          required
           type="text"
           name="name"
           className="modal__input"
@@ -60,6 +61,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           id="imageUrl"
           placeholder="Image URL"
           value={values.imageUrl}
+          required
           onChange={(e) => {
             handleChange(e);
             setErrors((prev) => ({
@@ -86,6 +88,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             className="modal__label modal__label_type_radio"
           >
             <input
+              required
               id={type}
               type="radio"
               name="type"

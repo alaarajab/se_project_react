@@ -1,19 +1,19 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
-import { defaultClothingItems } from "../../utils/constants";
 
-function ClothesSection({ onCardClick }) {
+function ClothesSection({ clothingItems, onCardClick, onAddNewClick }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
-        <p clothes-section__paragraph>Your Items</p>
-        <button className="clothes-section__btn">+ Add New</button>
+        <p>Your Items</p>
+        <button className="clothes-section__btn" onClick={onAddNewClick}>
+          + Add New
+        </button>
       </div>
-
       <ul className="clothes-section__items">
-        {defaultClothingItems.map((item) => (
+        {(clothingItems || []).map((item) => (
           <ItemCard
-            key={item._id ?? item.id} // ✅ always uses a unique key (API _id or local id)
+            key={item._id ?? item.id}
             item={item}
             onCardClick={onCardClick}
           />
