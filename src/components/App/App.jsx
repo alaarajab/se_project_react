@@ -126,11 +126,19 @@ function App() {
                   weatherData={weatherData}
                   clothingItems={clothingItems}
                   lastAddedItem={lastAddedItem}
-                  handleCardClick={handleCardClick}
+                  onCardClick={handleCardClick}
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  onAddNewClick={() => setIsAddModalOpen(true)}
+                />
+              }
+            />
           </Routes>
 
           <Footer />
