@@ -21,7 +21,7 @@ function App() {
     isDay: false,
   });
 
-  const [clothingItems, setClothingItems] = useState([]); // ✅ Initially empty, we fetch from API
+  const [clothingItems, setClothingItems] = useState([]);
   const [lastAddedItem, setLastAddedItem] = useState(null);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -39,7 +39,6 @@ function App() {
   const handleAddClick = () => setActiveModal("add-garment");
   const closeActiveModal = () => setActiveModal("");
 
-  //  Add item using API
   const handleAddItem = (values) => {
     const newItem = {
       name: values.name,
@@ -47,7 +46,7 @@ function App() {
       weather: values.type,
     };
 
-    addItem(newItem) // Use api.js function with correct headers
+    addItem(newItem)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
         setLastAddedItem(savedItem);
@@ -56,7 +55,6 @@ function App() {
       .catch((err) => console.error("Failed to add item:", err));
   };
 
-  // Delete item using API
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
@@ -103,7 +101,7 @@ function App() {
                   clothingItems={clothingItems}
                   lastAddedItem={lastAddedItem}
                   onCardClick={handleCardClick}
-                  onDeleteItem={handleDeleteItem} // Added delete functionality
+                  onDeleteItem={handleDeleteItem}
                 />
               }
             />
@@ -123,14 +121,13 @@ function App() {
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
-          onAddItem={handleAddItem} // Uses API function
+          onAddItem={handleAddItem}
         />
 
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
-          onDeleteItem={handleDeleteItem} // Uses API function
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
