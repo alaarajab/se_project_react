@@ -183,28 +183,25 @@ function App() {
     isDay: false,
   });
 
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState([]); // ✅ Initially empty, we fetch from API
   const [lastAddedItem, setLastAddedItem] = useState(null);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
-  // Toggle temperature unit
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
   };
 
-  // Card click → show preview modal
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
-  // Add button → open add modal
   const handleAddClick = () => setActiveModal("add-garment");
   const closeActiveModal = () => setActiveModal("");
 
-  // Add new item
+  // ✅ Add item using API
   const handleAddItem = (values) => {
     const newItem = {
       name: values.name,
@@ -212,7 +209,7 @@ function App() {
       weather: values.type,
     };
 
-    addItem(newItem)
+    addItem(newItem) // ✅ Use api.js function with correct headers
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
         setLastAddedItem(savedItem);
@@ -221,7 +218,7 @@ function App() {
       .catch((err) => console.error("Failed to add item:", err));
   };
 
-  // Delete item
+  // ✅ Delete item using API
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
@@ -231,7 +228,6 @@ function App() {
       .catch((err) => console.error("Failed to delete item:", err));
   };
 
-  // Close modals on Escape key
   useEffect(() => {
     if (!activeModal) return;
     const handleEscClose = (e) => {
@@ -241,17 +237,15 @@ function App() {
     return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
-  // Fetch weather
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
 
-  // Fetch items from server
   useEffect(() => {
     getItems()
-      .then((data) => setClothingItems(data))
+      .then((data) => setClothingItems(data)) // ✅ Previously you used a local array instead of API
       .catch(console.error);
   }, []);
 
@@ -262,7 +256,6 @@ function App() {
       <div className="page">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-
           <Routes>
             <Route
               path="/"
@@ -272,7 +265,7 @@ function App() {
                   clothingItems={clothingItems}
                   lastAddedItem={lastAddedItem}
                   onCardClick={handleCardClick}
-                  onDeleteItem={handleDeleteItem} // pass delete handler
+                  onDeleteItem={handleDeleteItem} // ✅ Added delete functionality
                 />
               }
             />
@@ -286,21 +279,20 @@ function App() {
               }
             />
           </Routes>
-
           <Footer />
         </div>
 
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
-          onAddItem={handleAddItem}
+          onAddItem={handleAddItem} // ✅ Uses API function
         />
 
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
-          onDeleteItem={handleDeleteItem} // pass delete handler
+          onDeleteItem={handleDeleteItem} // ✅ Uses API function
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>
