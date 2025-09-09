@@ -1,6 +1,5 @@
 import "./ItemCard.css";
 
-// ✅ This component just renders a single <li> for the item
 function ItemCard({ item, onCardClick }) {
   const handleCardClick = () => {
     onCardClick(item);
@@ -8,12 +7,11 @@ function ItemCard({ item, onCardClick }) {
 
   return (
     <li className="card">
-      {/* No key here — key should be on the component when used in a list */}
       <h2 className="card__name">{item.name}</h2>
       <img
         onClick={handleCardClick}
         className="card__image"
-        src={item.link}
+        src={item.imageUrl || item.link} // ✅ works for both API and local items
         alt={item.name}
       />
     </li>

@@ -13,7 +13,7 @@ function ClothesSection({ onCardClick }) {
       <ul className="clothes-section__items">
         {defaultClothingItems.map((item) => (
           <ItemCard
-            key={item._id || item.id} // ✅ key goes here, on the component used in the list
+            key={item._id ?? item.id} // ✅ always uses a unique key (API _id or local id)
             item={item}
             onCardClick={onCardClick}
           />

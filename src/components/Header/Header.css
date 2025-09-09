@@ -52,3 +52,7 @@
   font-size: 20px;
   line-height: 100%;
 }
+.header__link {
+  text-decoration: none;
+  color: #000;
+}
