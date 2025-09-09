@@ -1,0 +1,24 @@
+.clothes-section__header {
+  display: flex;
+  gap: 20px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.clothes-section__btn {
+  background-color: none;
+  border: none;
+  cursor: pointer;
+  color: #00000099;
+}
+.clothes-section__items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 20px;
+}

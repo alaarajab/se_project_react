@@ -1,4 +1,13 @@
 .profile {
   display: flex;
-  gap: 100px;
+  justify-content: space-between;
+  gap: 116px;
+  align-items: flex-start;
+}
+.Profile__sidebar {
+  flex: 0 0 200px; /* Fixed width for sidebar */
+}
+
+.Profile__clothing-items {
+  flex: 1; /* Take remaining space for clothing items */
 }

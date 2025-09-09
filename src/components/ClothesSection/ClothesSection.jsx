@@ -6,8 +6,8 @@ function ClothesSection({ onCardClick }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
-        <p>Your Items</p>
-        <button>+ Add New</button>
+        <p clothes-section__paragraph>Your Items</p>
+        <button className="clothes-section__btn">+ Add New</button>
       </div>
 
       <ul className="clothes-section__items">
