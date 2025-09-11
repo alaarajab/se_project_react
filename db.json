@@ -113,6 +113,36 @@
       "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
       "weather": "hot",
       "_id": 18
+    },
+    {
+      "name": "ffff",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "warm",
+      "_id": 19
+    },
+    {
+      "name": "ss",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "hot",
+      "_id": 20
+    },
+    {
+      "name": "l",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "hot",
+      "_id": 21
+    },
+    {
+      "name": "ll",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "warm",
+      "_id": 22
+    },
+    {
+      "name": "ASEL ABOZOR",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/99/Black_square.jpg",
+      "weather": "cold",
+      "_id": 23
     }
   ]
 }

@@ -15,6 +15,7 @@
   display: block;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+  max-height: 498px;
 }
 
 .modal__close {

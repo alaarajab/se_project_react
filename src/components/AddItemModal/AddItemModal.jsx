@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -6,12 +6,33 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const defaultValues = { name: "", imageUrl: "", type: "" };
   const { values, handleChange, resetForm } = useForm(defaultValues);
   const [errors, setErrors] = useState({ name: "", imageUrl: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const wasOpen = useRef(false);
+
+  useEffect(() => {
+    if (isOpen && !wasOpen.current) {
+      resetForm();
+      setErrors({ name: "", imageUrl: "" });
+    }
+    wasOpen.current = isOpen;
+  }, [isOpen, resetForm]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddItem(values);
-    resetForm();
-    setErrors({ name: "", imageUrl: "" });
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      await onAddItem(values);
+
+      resetForm();
+      setErrors({ name: "", imageUrl: "" });
+    } catch (err) {
+      console.error("Failed to add item:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const isSubmitDisabled =
@@ -19,13 +40,14 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     !values.imageUrl.trim() ||
     !!errors.name ||
     !!errors.imageUrl ||
-    !values.type;
+    !values.type ||
+    isSubmitting;
 
   return (
     <ModalWithForm
       title="New garment"
       name="new-card"
-      buttonText="Add garment"
+      buttonText={isSubmitting ? "Adding..." : "Add garment"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

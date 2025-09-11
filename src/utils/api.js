@@ -1,9 +1,14 @@
 const baseUrl = "http://localhost:3001";
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+}
 
 export const getItems = async () => {
   const res = await fetch(`${baseUrl}/items`);
-  if (!res.ok) throw new Error(`Error fetching items: ${res.status}`);
-  return res.json();
+  return checkResponse(res);
 };
 
 export const addItem = async (item) => {
@@ -15,8 +20,7 @@ export const addItem = async (item) => {
     body: JSON.stringify(item),
   });
 
-  if (!res.ok) throw new Error(`Error adding item: ${res.status}`);
-  return res.json();
+  return checkResponse(res);
 };
 
 export const deleteItem = async (id) => {
@@ -27,6 +31,5 @@ export const deleteItem = async (id) => {
     },
   });
 
-  if (!res.ok) throw new Error(`Error deleting item: ${res.status}`);
-  return true;
+  return checkResponse(res);
 };
