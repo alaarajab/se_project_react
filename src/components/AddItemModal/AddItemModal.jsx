@@ -25,16 +25,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     setIsSubmitting(true);
     try {
       await onAddItem(values);
-
-      resetForm();
-      setErrors({ name: "", imageUrl: "" });
     } catch (err) {
       console.error("Failed to add item:", err);
     } finally {
       setIsSubmitting(false);
     }
   };
-
   const isSubmitDisabled =
     !values.name.trim() ||
     !values.imageUrl.trim() ||
