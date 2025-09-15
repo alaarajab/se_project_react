@@ -11,7 +11,7 @@ function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
   const handleConfirmDelete = () => {
     onDeleteItem(card._id);
     setIsConfirmOpen(false);
-    onClose(); // optionally close the main modal after deletion
+    onClose();
   };
 
   return (

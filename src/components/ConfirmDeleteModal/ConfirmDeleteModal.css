@@ -67,7 +67,7 @@
   flex-direction: column; /* stack buttons vertically */
   gap: 12px;
   width: 100%; /* optional: make buttons full width */
-  max-width: 200px; /* limit width */
+  max-width: 200px;
   align-items: center; /* center buttons horizontally */
 }
 
