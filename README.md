@@ -13,9 +13,17 @@
 - **UX Enhancements**: Feedback on form actions (“Saving…”, “Deleting…”) and optional confirmation modals for deletion.
 
 ## Images
-![Image](https://github.com/user-attachments/assets/71eafb0c-5023-44e1-9e49-88d9ed97cd17)
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125557_localhost.jpeg)
 
-![Image](https://github.com/user-attachments/assets/f6c82f02-de36-413a-8342-3400f267edf1)
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125617_localhost.jpeg)
+
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125630_localhost.jpeg)
+
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125657_localhost.jpeg)
+
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125712_localhost.jpeg)
+
+![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125741_localhost.jpeg)
 
 
 ## Tech Stack
