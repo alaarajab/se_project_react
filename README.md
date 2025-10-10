@@ -11,6 +11,23 @@
 - **Mock Server Integration**: Persist data using a `json-server` API for GET, POST, and DELETE requests.  
 - **Responsive Design**: Optimized for mobile and desktop users.  
 - **UX Enhancements**: Feedback on form actions (“Saving…”, “Deleting…”) and optional confirmation modals for deletion.
+- 
+## Tech Stack
+
+- **Frontend**: React, JavaScript (ES6+), HTML, CSS, Responsive Design  
+- **State Management**: React Context, Custom Hooks (`useForm`)  
+- **Routing**: React Router v6  
+- **Backend / API**: `json-server` (mock server), RESTful API, fetch / Axios  
+- **Tools & Workflow**: Git, GitHub, VS Code, Figma, Webpack
+
+## Deployment and Future Enhancements
+
+This project is intended to run locally with the mock server. GitHub Pages deployment is not recommended while using the local API due to routing and API limitations. 
+
+> **Note:** Currently, the application uses a hardcoded/mock database (`db.json`) for demonstration purposes. These items will not appear in a production deployment. A full backend with a database will be implemented in the next sprint in my TripleTen course.
+
+Future deployment will use cloud services for full backend integration.
+
 
 ## Images
 ![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125557_localhost.jpeg)
@@ -25,23 +42,8 @@
 
 ![Image](https://github.com/alaarajab/se_project_react/blob/0a7e69782a5509de1c774286a9b3f3814389e0d9/Screenshot_10-10-2025_125741_localhost.jpeg)
 
-
-## Tech Stack
-
-- **Frontend**: React, JavaScript (ES6+), HTML, CSS, Responsive Design  
-- **State Management**: React Context, Custom Hooks (`useForm`)  
-- **Routing**: React Router v6  
-- **Backend / API**: `json-server` (mock server), RESTful API, fetch / Axios  
-- **Tools & Workflow**: Git, GitHub, VS Code, Figma, Webpack
-
-## Deployment
-
-This project is intended to run locally with the mock server. GitHub Pages deployment is not recommended while using the local API due to routing and API limitations. 
-
-> **Note:** Currently, the application uses a hardcoded/mock database (`db.json`) for demonstration purposes. These items will not appear in a production deployment. A full backend with a database will be implemented in the next sprint in my TripleTen course.
-
-Future deployment will use cloud services for full backend integration.
-
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
+
+
