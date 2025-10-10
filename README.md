@@ -22,6 +22,14 @@
 - **Backend / API**: `json-server` (mock server), RESTful API, fetch / Axios  
 - **Tools & Workflow**: Git, GitHub, VS Code, Figma, Webpack
 
+## Deployment
+
+This project is intended to run locally with the mock server. GitHub Pages deployment is not recommended while using the local API due to routing and API limitations. 
+
+> **Note:** Currently, the application uses a hardcoded/mock database (`db.json`) for demonstration purposes. These items will not appear in a production deployment. A full backend with a database will be implemented in the next sprint in my TripleTen course.
+
+Future deployment will use cloud services for full backend integration.
+
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
