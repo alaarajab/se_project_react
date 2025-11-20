@@ -11,25 +11,24 @@ export const getItems = async () => {
   return checkResponse(res);
 };
 
-export const addItem = async (item) => {
-  const res = await fetch(`${baseUrl}/items`, {
+export const addItem = async (item, token) => {
+  return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
+      authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-  });
-
-  return checkResponse(res);
+  }).then(checkResponse);
 };
 
-export const deleteItem = async (id) => {
-  const res = await fetch(`${baseUrl}/items/${id}`, {
+export const deleteItem = async (id, token) => {
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
+      authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-  });
-
-  return checkResponse(res);
+    body: JSON.stringify(item),
+  }).then(checkResponse);
 };

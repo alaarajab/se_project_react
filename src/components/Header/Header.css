@@ -56,3 +56,29 @@
   text-decoration: none;
   color: #000;
 }
+.header__button {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  background-color: transparent;
+  /*padding: 8px 16px;*/
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header__button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.header__button_logout {
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+}
+
+.header__button_logout:hover {
+  background-color: #ff4d4f;
+  color: #fff;
+}
