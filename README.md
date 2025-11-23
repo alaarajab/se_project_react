@@ -45,10 +45,6 @@ Future deployment will use cloud services for full backend integration.
 
 ## Links
 
-## Backend Repository
-
-The backend for this project is available here:
-
-- [Backend Repository] (https://github.com/alaarajab/se_project_express)
+- [Backend Repository](https://github.com/alaarajab/se_project_express)
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
