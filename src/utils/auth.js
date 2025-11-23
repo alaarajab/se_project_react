@@ -56,3 +56,15 @@ export const checkToken = () => {
     },
   }).then(checkResponse);
 };
+export const updateUser = async (data, token) => {
+  const res = await fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Failed to update profile");
+  return res.json();
+};

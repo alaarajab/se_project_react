@@ -31,3 +31,22 @@ export const deleteItem = async (id, token) => {
     },
   }).then(checkResponse);
 };
+export const updateUser = async ({ name, avatar }) => {
+  const token = localStorage.getItem("jwt"); // ✅ get JWT token
+
+  const res = await fetch(`${baseUrl}/users/me`, {
+    method: "PATCH", // ✅ PATCH to update partial fields
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`, // ✅ send JWT in header
+    },
+    body: JSON.stringify({ name, avatar }), // ✅ updated data
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Failed to update user"); // ✅ handle errors
+  }
+
+  return res.json(); // ✅ return updated user
+};

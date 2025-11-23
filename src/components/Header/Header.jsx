@@ -12,6 +12,7 @@ function Header({
   loggedIn,
   handleLogout,
   currentUser,
+  onEditProfileClick,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -40,14 +41,12 @@ function Header({
             >
               + add clothes
             </button>
-
             <button
               className="header__button header__button_logout"
               onClick={handleLogout}
             >
               Logout
             </button>
-
             <Link to="/profile" className="header__link">
               <div className="header__user-container">
                 <p className="header__username">
@@ -60,6 +59,15 @@ function Header({
                 />
               </div>
             </Link>
+            {/* ✅ Edit Profile button 
+            <button
+              onClick={onEditProfileClick}
+              type="button"
+              className="header__button header__button_edit"
+            >
+              Edit Profile
+            </button>
+            */}
           </>
         ) : (
           <>
