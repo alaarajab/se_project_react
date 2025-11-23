@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react"; // ✅ added useContext
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import "./ItemModal.css";
 import closeIcon from "../../assets/closeIcon_white.png";
+import CurrentUserContext from "../../contexts/CurrentUserContext"; // ✅ import the context
 
 function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
   const isOpen = activeModal === "preview";
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+
+  const currentUser = useContext(CurrentUserContext); // ✅ subscribe to current user
+
+  const isOwn = currentUser?._id && card?.owner === currentUser._id;
+  const itemDeleteButtonClassName = `modal__delete-button ${
+    isOwn ? "" : "modal__delete-button_hidden"
+  }`;
 
   const handleDeleteClick = () => setIsConfirmOpen(true);
   const handleConfirmDelete = () => {
@@ -35,12 +43,16 @@ function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
           <div className="modal__footer">
             <div className="modal__caption-container">
               <h2 className="modal__caption">{card.name || "Unnamed Item"}</h2>
-              <button
-                className="modal__delete-button"
-                onClick={handleDeleteClick}
-              >
-                Delete Item
-              </button>
+
+              {/* ✅ only show delete button if current user owns the item */}
+              {isOwn && (
+                <button
+                  className={itemDeleteButtonClassName}
+                  onClick={handleDeleteClick}
+                >
+                  Delete Item
+                </button>
+              )}
             </div>
             <p className="modal__weather">
               Weather: {card.weather || "Unknown"}

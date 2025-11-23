@@ -11,6 +11,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Profile from "../Profile/Profile";
 import { getItems, addItem, deleteItem } from "../../utils/api";
@@ -223,13 +224,14 @@ function App() {
           onClose={closeActiveModal}
           onAddItem={handleAddItem}
         />
-
-        <ItemModal
-          activeModal={activeModal}
-          card={selectedCard}
-          onClose={closeActiveModal}
-          onDeleteItem={handleDeleteItem}
-        />
+        <CurrentUserContext.Provider value={currentUser}>
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            onDeleteItem={handleDeleteItem}
+          />
+        </CurrentUserContext.Provider>
         <RegisterModal
           isOpen={activeModal === "register"}
           onClose={closeActiveModal}
