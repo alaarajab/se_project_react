@@ -29,6 +29,5 @@ export const deleteItem = async (id, token) => {
       authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(item),
   }).then(checkResponse);
 };
