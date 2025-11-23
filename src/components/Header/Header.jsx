@@ -59,15 +59,6 @@ function Header({
                 />
               </div>
             </Link>
-            {/* ✅ Edit Profile button 
-            <button
-              onClick={onEditProfileClick}
-              type="button"
-              className="header__button header__button_edit"
-            >
-              Edit Profile
-            </button>
-            */}
           </>
         ) : (
           <>

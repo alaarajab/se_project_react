@@ -178,8 +178,9 @@ function App() {
     try {
       const updatedUser = await auth.updateUser(data, token); // call API
       setCurrentUser(updatedUser); // update state
-      setIsEditProfileOpen(false); // ✅ close modal after update
+      setIsEditProfileOpen(false);
       alert("Profile updated successfully!");
+      closeActiveModal();
     } catch (err) {
       console.error("Failed to update profile:", err);
       alert("Failed to update profile.");
