@@ -1,6 +1,6 @@
 import { getToken, setToken, removeToken } from "./token";
 
-export const BASE_URL = "https://api.nomoreparties.co";
+export const BASE_URL = "http://localhost:3001";
 
 // Helper to handle fetch responses and throw full API error
 function checkResponse(res) {
@@ -10,33 +10,28 @@ function checkResponse(res) {
   });
 }
 
-/**
- * Register a new user
- * @param {Object} data - { username, email, password, avatar? }
- */
-export const register = ({ username, email, password, avatar }) => {
-  return fetch(`${BASE_URL}/auth/local/register`, {
+export const register = ({ name, email, password, avatar }) => {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, email, password, avatar }),
+    body: JSON.stringify({
+      name, // <-- map `username` to `name` for backend
+      email,
+      password,
+      avatar,
+    }),
   }).then(checkResponse);
 };
 
-/**
- * Login user and save token
- * @param {Object} data - { email, password }
- */
-export const login = ({ email, password }) => {
-  return fetch(`${BASE_URL}/auth/local`, {
+export const login = async ({ email, password }) => {
+  const data = await fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ identifier: email, password }),
-  })
-    .then(checkResponse)
-    .then((data) => {
-      setToken(data.jwt);
-      return data;
-    });
+    body: JSON.stringify({ email, password }),
+  }).then(checkResponse);
+
+  setToken(data.jwt); // store JWT
+  return data;
 };
 
 /**
@@ -55,6 +50,9 @@ export const checkToken = () => {
 
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // send JWT
+    },
   }).then(checkResponse);
 };

@@ -57,7 +57,6 @@ function App() {
       weather: values.type,
     };
     const token = getToken();
-
     addItem(newItem, token)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
@@ -69,7 +68,6 @@ function App() {
 
   const handleDeleteItem = (id) => {
     if (!loggedIn) return;
-
     const token = getToken();
     deleteItem(id, token)
       .then(() => {
@@ -99,72 +97,77 @@ function App() {
       .then((data) => setClothingItems(data))
       .catch(console.error);
   }, []);
+
+  // ------------------------
   // AUTH HANDLERS
+  // ------------------------
+
   const handleRegister = async (data) => {
     try {
-      // Send registration request
+      // 1️⃣ Send registration request
       await auth.register({
-        username: data.name,
+        name: data.name, // frontend uses `username`, backend expects `name`
         email: data.email,
         password: data.password,
         avatar: data.avatar || "",
       });
 
-      // Auto-login after registration
+      // 2️⃣ Auto-login immediately after registration to get token
       const res = await auth.login({
         email: data.email,
         password: data.password,
       });
+
+      // 3️⃣ Fetch current user info from /users/me now that token exists
+      const user = await auth.checkToken(); // ✅ token is valid after login
+
       setLoggedIn(true);
-      setCurrentUser(res.user);
+      setCurrentUser(user);
       closeActiveModal();
     } catch (err) {
-      // If error comes from fetch response
-      if (err instanceof Response) {
-        const errorData = await err.json();
-        console.error("Strapi registration error:", errorData);
-
-        // Extract first message from Strapi response
-        const message =
-          errorData?.message?.[0]?.messages?.[0]?.message ||
-          "Registration failed";
-
-        // Return error to modal so it can display
-        throw new Error(message);
-      } else {
-        console.error("Other registration error:", err);
-        throw new Error(err.message || "Registration failed");
-      }
+      console.error("Registration failed:", err);
+      let message = "Registration failed. Please try again.";
+      if (err.message) message = err.message;
+      alert(message);
     }
   };
+
   const handleLogin = async (data) => {
     try {
+      // 1️⃣ Send login request
       const res = await auth.login({
         email: data.email,
         password: data.password,
       });
 
+      // 2️⃣ Fetch current user info
+      const user = await auth.checkToken(); // ✅ token must exist in localStorage
+
       setLoggedIn(true);
-      setCurrentUser(res.user);
+      setCurrentUser(user);
       closeActiveModal();
     } catch (err) {
       console.error("Login failed:", err);
-
-      if (err.message) alert(err.message);
-      else if (Array.isArray(err) && err[0]?.messages)
-        alert(err[0].messages[0].message);
-      else alert("Login failed. Please check your credentials.");
+      let message = "Login failed. Please check your credentials.";
+      if (err.message) message = err.message;
+      alert(message);
     }
   };
-  //  AUTO LOGIN
+
+  // ------------------------
+  // AUTO LOGIN on page load
+  // ------------------------
   useEffect(() => {
-    auth
-      .checkToken()
-      .then((user) => {
-        setLoggedIn(true);
-        setCurrentUser(user);
-      })
-      .catch(() => auth.logout());
+    const token = getToken();
+    if (token) {
+      auth
+        .checkToken()
+        .then((user) => {
+          setLoggedIn(true);
+          setCurrentUser(user);
+        })
+        .catch(() => auth.logout());
+    }
   }, []);
 
   return (
