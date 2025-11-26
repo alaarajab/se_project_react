@@ -41,20 +41,15 @@ function Header({
             >
               + add clothes
             </button>
-            <button
-              className="header__button header__button_logout"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
+
             <Link to="/profile" className="header__link">
               <div className="header__user-container">
                 <p className="header__username">
-                  {currentUser?.username || "User"}
+                  {currentUser ? currentUser.name : "User"}
                 </p>
                 <img
-                  src={avatar}
-                  alt={currentUser?.username || "User"}
+                  src={currentUser?.avatar || avatar}
+                  alt="User avatar"
                   className="header__avatar"
                 />
               </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 import Header from "../Header/Header";
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
@@ -20,6 +21,7 @@ import * as auth from "../../utils/auth";
 import { getToken } from "../../utils/token";
 
 function App() {
+  const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -143,17 +145,20 @@ function App() {
         password: data.password,
       });
 
-      // 2️⃣ Fetch current user info
-      const user = await auth.checkToken(); // ✅ token must exist in localStorage
+      // 2️⃣ Save the JWT (IMPORTANT!)
+      const token = res.token || res.jwt;
+      if (token) localStorage.setItem("jwt", token);
 
+      // 3️⃣ Now fetch the user info
+      const user = await auth.checkToken();
+
+      // 4️⃣ Update global state
       setLoggedIn(true);
       setCurrentUser(user);
       closeActiveModal();
     } catch (err) {
       console.error("Login failed:", err);
-      let message = "Login failed. Please check your credentials.";
-      if (err.message) message = err.message;
-      alert(message);
+      alert(err.message || "Login failed. Please try again.");
     }
   };
 
@@ -198,11 +203,6 @@ function App() {
               handleAddClick={handleAddClick}
               handleRegisterClick={handleRegisterClick}
               handleLoginClick={handleLoginClick}
-              handleLogout={() => {
-                auth.logout();
-                setLoggedIn(false);
-                setCurrentUser(null);
-              }}
               weatherData={weatherData}
               loggedIn={loggedIn}
               currentUser={currentUser}
@@ -229,6 +229,12 @@ function App() {
                       onCardClick={handleCardClick}
                       onAddNewClick={handleAddClick}
                       onUpdateUser={handleUpdateUser}
+                      handleLogout={() => {
+                        auth.logout();
+                        setLoggedIn(false);
+                        setCurrentUser(null);
+                        navigate("/");
+                      }}
                     />
                   </ProtectedRoute>
                 }

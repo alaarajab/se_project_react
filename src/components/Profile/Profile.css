@@ -1,13 +1,41 @@
-.profile {
+/*.profile {
   display: flex;
   justify-content: space-between;
   gap: 116px;
   align-items: flex-start;
 }
 .profile__sidebar {
-  flex: 0 0 200px; /* Fixed width for sidebar */
+  flex: 0 0 200px; 
 }
 
-.profile__clothing-items {
+*/
+.profile {
+  display: flex;
+  justify-content: flex-start;
+  gap: 116px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.Profile__sidebar {
+  flex: 0 0 200px; /* Fixed width for sidebar */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: flex-start;
+  gap: 16px; /* space between sidebar elements (avatar, buttons) */
+}
+
+.profile__edit-button,
+.profile__logout-button {
+  width: 100%;
+
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Profile__clothing-items {
   flex: 1; /* Take remaining space for clothing items */
 }

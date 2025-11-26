@@ -1,11 +1,21 @@
-import "./SideBar.css";
+import React, { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import avatar from "../../assets/avatar.png";
+import "./SideBar.css"; // ✅ Make sure this path is correct
+
 function SideBar() {
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <div className="sidebar">
-      <img className="sidebar__avatar" src={avatar} alt="Default avatar" />
-      <p className="sidebar__username">User name</p>
+      <img
+        className="sidebar__avatar"
+        src={currentUser?.avatar || avatar}
+        alt={currentUser?.name || "User"}
+      />
+      <p className="sidebar__username">{currentUser?.name || "User"}</p>
     </div>
   );
 }
+
 export default SideBar;

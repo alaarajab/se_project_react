@@ -9,6 +9,7 @@ function Profile({
   onCardClick,
   onAddNewClick,
   onUpdateUser,
+  handleLogout,
 }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -20,7 +21,10 @@ function Profile({
       <section className="Profile__sidebar">
         <SideBar />
         <button onClick={handleEditClick} className="profile__edit-button">
-          Edit Profile
+          Change profile data
+        </button>
+        <button onClick={handleLogout} className="profile__logout-button">
+          Log Out
         </button>
       </section>
 

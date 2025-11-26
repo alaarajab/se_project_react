@@ -1,17 +1,22 @@
 .sidebar {
-  display: flex;
-  gap: 16px;
+  display: flex; /* horizontal layout */
+  align-items: center; /* vertically center items */
+  gap: 16px; /* space between avatar and username */
 }
-.sidebar__username {
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 20px;
 
-  line-height: 100%;
-  letter-spacing: 0%;
-}
 .sidebar__avatar {
-  width: 56px;
-  height: 56px;
+  width: 56px; /* fixed width */
+  height: 56px; /* fixed height */
+  border-radius: 50%; /* circle shape */
+  object-fit: cover; /* scale image correctly */
+  border: 1px solid #000; /* optional border */
+  flex-shrink: 0; /* prevents shrinking in flex container */
+}
+
+.sidebar__username {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  margin: 0; /* remove default <p> margin */
 }
