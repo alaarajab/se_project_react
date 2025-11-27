@@ -6,28 +6,55 @@
   border: 1px solid #0000004d;
   border-radius: 19px;
 }
-
-.card__name {
+.card__header {
   position: absolute;
   top: 15px;
+  left: 15px;
+  right: 15px;
+
+  display: flex;
+  justify-content: center; /* name on one side, like button on the other */
+  align-items: center;
+  gap: 10px;
+}
+
+/* ITEM NAME BOX */
+.card__name {
   margin: 0;
-  width: 72px;
+  width: auto;
   height: 24px;
   border-radius: 4px;
   padding: 2px 12px;
   background-color: #ffffff;
-  font-family: Cabinet Grotesk;
-  font-weight: Bold;
+
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: bold;
   font-style: normal;
   font-size: 16px;
-
   line-height: 20px;
+
   color: #00000099;
 }
 
+/* LIKE BUTTON (no default button styles) */
+.like-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* LIKE/UNLIKE IMAGE */
+.like-button__image {
+  width: 24px;
+  height: 24px;
+}
+
+/* MAIN ITEM IMAGE */
 .card__image {
-  width: 100%;
-  border-radius: 19px;
-  height: auto;
+  width: 325px;
+  height: 328px;
   object-fit: cover;
+  border-radius: 19px;
+  display: block;
 }

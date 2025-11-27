@@ -23,7 +23,8 @@
 }
 
 .modal__image {
-  width: 100%;
+  width: 498px;
+  height: 610px;
   display: block;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;

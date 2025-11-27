@@ -191,7 +191,45 @@ function App() {
       alert("Failed to update profile.");
     }
   };
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
 
+    // ------------------------------
+    // 1️⃣ Optimistically update UI
+    // ------------------------------
+    setClothingItems((cards) =>
+      cards.map((item) =>
+        item._id === id ? { ...item, isLiked: !isLiked } : item
+      )
+    );
+
+    // ------------------------------
+    // 2️⃣ Call API
+    // ------------------------------
+    const apiCall = !isLiked ? api.addCardLike : api.removeCardLike;
+
+    apiCall(id, token)
+      .then((res) => {
+        // ------------------------------
+        // 3️⃣ Update with server response
+        // ------------------------------
+        const updatedCard = res.data; // backend now returns isLiked
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === id ? updatedCard : item))
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+
+        // If API fails, revert optimistic update
+        setClothingItems((cards) =>
+          cards.map((item) =>
+            item._id === id ? { ...item, isLiked: isLiked } : item
+          )
+        );
+        alert("Failed to update like. Please try again.");
+      });
+  };
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -217,6 +255,7 @@ function App() {
                     lastAddedItem={lastAddedItem}
                     onCardClick={handleCardClick}
                     onDeleteItem={handleDeleteItem}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
