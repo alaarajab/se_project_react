@@ -2,11 +2,10 @@ import { getToken, setToken, removeToken } from "./token";
 
 export const BASE_URL = "http://localhost:3001";
 
-// Helper to handle fetch responses and throw full API error
 function checkResponse(res) {
   return res.json().then((data) => {
     if (res.ok) return data;
-    throw data; // throw full API error object
+    throw data;
   });
 }
 
@@ -15,7 +14,7 @@ export const register = ({ name, email, password, avatar }) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name, // <-- map `username` to `name` for backend
+      name,
       email,
       password,
       avatar,
@@ -34,16 +33,10 @@ export const login = async ({ email, password }) => {
   return data;
 };
 
-/**
- * Logout user (remove token)
- */
 export const logout = () => {
   removeToken();
 };
 
-/**
- * Check token validity and get user info
- */
 export const checkToken = () => {
   const token = getToken();
   if (!token) return Promise.reject("No token found");

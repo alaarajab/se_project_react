@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Header from "../Header/Header";
 import "./App.css";
-import { coordinates, APIkey } from "../../utils/constants";
+import { coordinates, apiKey } from "../../utils/constants";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
@@ -92,7 +92,7 @@ function App() {
   }, [activeModal]);
 
   useEffect(() => {
-    getWeather(coordinates, APIkey)
+    getWeather(coordinates, apiKey)
       .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
@@ -109,22 +109,22 @@ function App() {
 
   const handleRegister = async (data) => {
     try {
-      // 1️⃣ Send registration request
+      // Send registration request
       await auth.register({
-        name: data.name, // frontend uses `username`, backend expects `name`
+        name: data.name,
         email: data.email,
         password: data.password,
         avatar: data.avatar || "",
       });
 
-      // 2️⃣ Auto-login immediately after registration to get token
+      // Auto-login immediately after registration to get token
       const res = await auth.login({
         email: data.email,
         password: data.password,
       });
 
-      // 3️⃣ Fetch current user info from /users/me now that token exists
-      const user = await auth.checkToken(); // ✅ token is valid after login
+      // Fetch current user info from /users/me now that token exists
+      const user = await auth.checkToken(); //token is valid after login
 
       setLoggedIn(true);
       setCurrentUser(user);
@@ -139,20 +139,20 @@ function App() {
 
   const handleLogin = async (data) => {
     try {
-      // 1️⃣ Send login request
+      //Send login request
       const res = await auth.login({
         email: data.email,
         password: data.password,
       });
 
-      // 2️⃣ Save the JWT (IMPORTANT!)
+      // Save the JWT
       const token = res.token || res.jwt;
       if (token) localStorage.setItem("jwt", token);
 
-      // 3️⃣ Now fetch the user info
+      // Now fetch the user info
       const user = await auth.checkToken();
 
-      // 4️⃣ Update global state
+      // Update global state
       setLoggedIn(true);
       setCurrentUser(user);
       closeActiveModal();
@@ -162,9 +162,7 @@ function App() {
     }
   };
 
-  // ------------------------
   // AUTO LOGIN on page load
-  // ------------------------
   useEffect(() => {
     const token = getToken();
     if (token) {
@@ -194,25 +192,19 @@ function App() {
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
 
-    // ------------------------------
-    // 1️⃣ Optimistically update UI
-    // ------------------------------
+    //Optimistically update UI
     setClothingItems((cards) =>
       cards.map((item) =>
         item._id === id ? { ...item, isLiked: !isLiked } : item
       )
     );
 
-    // ------------------------------
-    // 2️⃣ Call API
-    // ------------------------------
+    // Call API
     const apiCall = !isLiked ? api.addCardLike : api.removeCardLike;
 
     apiCall(id, token)
       .then((res) => {
-        // ------------------------------
-        // 3️⃣ Update with server response
-        // ------------------------------
+        // Update with server response
         const updatedCard = res.data; // backend now returns isLiked
         setClothingItems((cards) =>
           cards.map((item) => (item._id === id ? updatedCard : item))

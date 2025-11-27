@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import avatar from "../../assets/avatar.png";
-import "./SideBar.css"; // ✅ Make sure this path is correct
+import "./SideBar.css";
 
 function SideBar() {
   const currentUser = useContext(CurrentUserContext);

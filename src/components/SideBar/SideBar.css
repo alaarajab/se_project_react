@@ -1,16 +1,16 @@
 .sidebar {
   display: flex; /* horizontal layout */
   align-items: center; /* vertically center items */
-  gap: 16px; /* space between avatar and username */
+  gap: 16px;
 }
 
 .sidebar__avatar {
-  width: 56px; /* fixed width */
-  height: 56px; /* fixed height */
-  border-radius: 50%; /* circle shape */
-  object-fit: cover; /* scale image correctly */
-  border: 1px solid #000; /* optional border */
-  flex-shrink: 0; /* prevents shrinking in flex container */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #000;
+  flex-shrink: 0;
 }
 
 .sidebar__username {
@@ -18,5 +18,5 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
-  margin: 0; /* remove default <p> margin */
+  margin: 0;
 }
