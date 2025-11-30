@@ -12,7 +12,7 @@
 }
 
 /* Change text color when its radio is selected */
-.modal__label_type_radio:has(.modal__radio-input:checked) {
+.modal__radio-input:checked + .modal__radio-text {
   color: #000;
 }
 .modal__error {

@@ -13,7 +13,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Profile from "../Profile/Profile";
 import { getItems, addItem, deleteItem } from "../../utils/api";
@@ -31,7 +31,6 @@ function App() {
   });
 
   const [clothingItems, setClothingItems] = useState([]);
-  const [lastAddedItem, setLastAddedItem] = useState(null);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -65,7 +64,7 @@ function App() {
     addItem(newItem, token)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
-        setLastAddedItem(savedItem);
+
         closeActiveModal();
       })
       .catch((err) => console.error("Failed to add item:", err));
@@ -244,7 +243,6 @@ function App() {
                   <Main
                     weatherData={weatherData}
                     clothingItems={clothingItems}
-                    lastAddedItem={lastAddedItem}
                     onCardClick={handleCardClick}
                     onDeleteItem={handleDeleteItem}
                     onCardLike={handleCardLike}
@@ -257,7 +255,9 @@ function App() {
                   <ProtectedRoute loggedIn={loggedIn}>
                     <Profile
                       clothingItems={clothingItems}
+                      currentUser={currentUser}
                       onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
                       onAddNewClick={handleAddClick}
                       onUpdateUser={handleUpdateUser}
                       handleLogout={() => {

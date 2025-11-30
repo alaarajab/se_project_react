@@ -6,7 +6,9 @@ import EditProfileModal from "../../components/EditProfileModal/EditProfileModal
 
 function Profile({
   clothingItems = [],
+  currentUser,
   onCardClick,
+  onCardLike,
   onAddNewClick,
   onUpdateUser,
   handleLogout,
@@ -31,8 +33,10 @@ function Profile({
       <section className="Profile__clothing-items">
         <ClothesSection
           clothingItems={clothingItems}
+          currentUser={currentUser}
           onCardClick={onCardClick}
           onAddNewClick={onAddNewClick}
+          onCardLike={onCardLike}
         />
       </section>
 

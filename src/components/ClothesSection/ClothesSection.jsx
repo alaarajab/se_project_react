@@ -1,7 +1,18 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ clothingItems, onCardClick, onAddNewClick }) {
+function ClothesSection({
+  clothingItems,
+  currentUser,
+  onCardClick,
+  onAddNewClick,
+  onCardLike,
+}) {
+  //Filter items belonging to the logged-in user
+  const userItems = clothingItems.filter(
+    (item) => item.owner === currentUser?._id
+  );
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__header">
@@ -10,12 +21,14 @@ function ClothesSection({ clothingItems, onCardClick, onAddNewClick }) {
           + Add New
         </button>
       </div>
+
       <ul className="clothes-section__items">
-        {(clothingItems || []).map((item) => (
+        {userItems.map((item) => (
           <ItemCard
             key={item._id ?? item.id}
             item={item}
             onCardClick={onCardClick}
+            onCardLike={onCardLike}
           />
         ))}
       </ul>

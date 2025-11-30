@@ -115,7 +115,9 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
               checked={values.type === type}
               onChange={handleChange}
             />
-            {type.charAt(0).toUpperCase() + type.slice(1)}
+            <span className="modal__radio-text">
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </span>
           </label>
         ))}
       </fieldset>

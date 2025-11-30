@@ -2,7 +2,7 @@ import { useState, useContext } from "react"; // ✅ added useContext
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import "./ItemModal.css";
 import closeIcon from "../../assets/closeIcon_white.png";
-import CurrentUserContext from "../../contexts/CurrentUserContext"; // ✅ import the context
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx"; // ✅ import the context
 
 function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
   const isOpen = activeModal === "preview";
