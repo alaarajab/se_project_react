@@ -1,0 +1,14 @@
+.modal__switch-button {
+  background: none;
+  border: none;
+  color: #808080 !important;
+  opacity: 0.7;
+  cursor: pointer;
+  font-family: Cabinet Grotesk !important;
+  font-weight: 700;
+  font-style: bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-decoration: none !important; /* remove underline */
+}

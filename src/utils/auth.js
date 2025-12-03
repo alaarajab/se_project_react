@@ -1,16 +1,8 @@
 import { getToken, setToken, removeToken } from "./token";
-
-export const BASE_URL = "http://localhost:3001";
-
-function checkResponse(res) {
-  return res.json().then((data) => {
-    if (res.ok) return data;
-    throw data;
-  });
-}
+import { checkResponse, baseUrl } from "./api";
 
 export const register = ({ name, email, password, avatar }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -23,7 +15,7 @@ export const register = ({ name, email, password, avatar }) => {
 };
 
 export const login = async ({ email, password }) => {
-  const data = await fetch(`${BASE_URL}/signin`, {
+  const data = await fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -41,7 +33,7 @@ export const checkToken = () => {
   const token = getToken();
   if (!token) return Promise.reject("No token found");
 
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +42,7 @@ export const checkToken = () => {
   }).then(checkResponse);
 };
 export const updateUser = async (data, token) => {
-  const res = await fetch(`${BASE_URL}/users/me`, {
+  const res = await fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./RegisterModal.css";
 
-const RegisterModal = ({ isOpen, onClose, onRegister }) => {
+const RegisterModal = ({ isOpen, onClose, onRegister, onSwitchToLogin }) => {
   const defaultValues = { name: "", avatar: "", email: "", password: "" };
   const { values, handleChange, resetForm } = useForm(defaultValues);
 
@@ -25,18 +26,16 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
     }
     wasOpen.current = isOpen;
   }, [isOpen, resetForm]);
-  const [generalError, setGeneralError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
 
     setIsSubmitting(true);
-    setGeneralError(""); // clear previous errors
     try {
       await onRegister(values);
     } catch (err) {
-      setGeneralError(err.message); // show Strapi error in modal
+      setErrors((prev) => ({ ...prev, api: err.message })); // ✅ show API error
     } finally {
       setIsSubmitting(false);
     }
@@ -62,16 +61,26 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
       onClose={onClose}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
+      extraButton={
+        // ✅ pass the "Or Login" button here
+        <button
+          type="button"
+          className="modal__switch-button"
+          onClick={onSwitchToLogin}
+        >
+          Or Login
+        </button>
+      }
     >
       {/* Name */}
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="register-name" className="modal__label">
         Name
         <input
           required
           type="text"
           name="name"
           className="modal__input"
-          id="name"
+          id="register-name"
           placeholder="Your name"
           value={values.name}
           onChange={(e) => {
@@ -86,14 +95,14 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
       </label>
 
       {/* Avatar */}
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="register-avatar" className="modal__label">
         Avatar URL
         <input
           required
           type="url"
           name="avatar"
           className="modal__input"
-          id="avatar"
+          id="register-avatar"
           placeholder="Avatar URL"
           value={values.avatar}
           onChange={(e) => {
@@ -110,14 +119,14 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
       </label>
 
       {/* Email */}
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email
         <input
           required
           type="email"
           name="email"
           className="modal__input"
-          id="email"
+          id="register-email"
           placeholder="Email"
           value={values.email}
           onChange={(e) => {
@@ -134,14 +143,14 @@ const RegisterModal = ({ isOpen, onClose, onRegister }) => {
       </label>
 
       {/* Password */}
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password
         <input
           required
           type="password"
           name="password"
           className="modal__input"
-          id="password"
+          id="register-password"
           placeholder="Password"
           value={values.password}
           onChange={(e) => {

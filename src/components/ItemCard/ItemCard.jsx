@@ -2,12 +2,13 @@ import "./ItemCard.css";
 import likeButton from "../../assets/likeButton.png";
 import unLikeButton from "../../assets/unLikeButton.png";
 
-function ItemCard({ item, onCardClick, onCardLike }) {
+function ItemCard({ item, onCardClick, onCardLike, loggedIn }) {
   const handleCardClick = () => {
     onCardClick(item);
   };
 
   const handleLike = () => {
+    if (!loggedIn) return;
     onCardLike({
       id: item._id,
       isLiked: item.isLiked,
@@ -18,14 +19,15 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     <li className="card">
       <div className="card__header">
         <h2 className="card__name">{item.name}</h2>
-        {/* LIKE / UNLIKE BUTTON */}
-        <button className="like-button" onClick={handleLike}>
-          <img
-            src={item.isLiked ? likeButton : unLikeButton}
-            alt={item.isLiked ? "Unlike" : "Like"}
-            className="like-button__image"
-          />
-        </button>
+        {loggedIn && (
+          <button className="like-button" onClick={handleLike}>
+            <img
+              src={item.isLiked ? likeButton : unLikeButton}
+              alt={item.isLiked ? "Unlike" : "Like"}
+              className="like-button__image"
+            />
+          </button>
+        )}
       </div>
 
       <img

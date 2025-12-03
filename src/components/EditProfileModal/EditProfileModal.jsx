@@ -29,11 +29,12 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (isSubmitDisabled) return; // prevent submission if disabled
 
     setIsSubmitting(true);
     try {
       await onUpdateUser(values);
+      onClose(); // automatically close modal after successful update
     } catch (err) {
       console.error("Failed to update profile:", err);
     } finally {
@@ -59,12 +60,12 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       isSubmitDisabled={isSubmitDisabled}
     >
       {/* Name */}
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="edit-profile-name" className="modal__label">
         Name
         <input
           type="text"
           name="name"
-          id="name"
+          id="edit-profile-name"
           className="modal__input"
           placeholder="Your name"
           value={values.name}
@@ -84,12 +85,12 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       </label>
 
       {/* Avatar URL */}
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="edit-profile-avatar" className="modal__label">
         Avatar URL
         <input
           type="url"
           name="avatar"
-          id="avatar"
+          id="edit-profile-avatar"
           className="modal__input"
           placeholder="https://example.com/avatar.jpg"
           value={values.avatar}

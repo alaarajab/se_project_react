@@ -7,6 +7,7 @@ function ClothesSection({
   onCardClick,
   onAddNewClick,
   onCardLike,
+  loggedIn,
 }) {
   //Filter items belonging to the logged-in user
   const userItems = clothingItems.filter(
@@ -29,6 +30,7 @@ function ClothesSection({
             item={item}
             onCardClick={onCardClick}
             onCardLike={onCardLike}
+            loggedIn={loggedIn}
           />
         ))}
       </ul>

@@ -1,28 +1,26 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Profile.css";
 import SideBar from "../../components/SideBar/SideBar";
 import ClothesSection from "../../components/ClothesSection/ClothesSection";
 import EditProfileModal from "../../components/EditProfileModal/EditProfileModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Profile({
   clothingItems = [],
-  currentUser,
   onCardClick,
   onCardLike,
   onAddNewClick,
   onUpdateUser,
   handleLogout,
+  onEditProfileClick,
 }) {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
-  const handleEditClick = () => setIsEditModalOpen(true);
-  const closeEditModal = () => setIsEditModalOpen(false);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <div className="profile">
       <section className="Profile__sidebar">
         <SideBar />
-        <button onClick={handleEditClick} className="profile__edit-button">
+        <button onClick={onEditProfileClick} className="profile__edit-button">
           Change profile data
         </button>
         <button onClick={handleLogout} className="profile__logout-button">
@@ -39,12 +37,6 @@ function Profile({
           onCardLike={onCardLike}
         />
       </section>
-
-      <EditProfileModal
-        isOpen={isEditModalOpen}
-        onClose={closeEditModal}
-        onUpdateUser={onUpdateUser} // API call to update user info
-      />
     </div>
   );
 }

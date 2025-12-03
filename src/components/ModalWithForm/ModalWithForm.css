@@ -26,21 +26,6 @@
   padding-right: 28px;
 }
 
-/*.modal__content_form {
-  background-color: #fff;
-  position: relative;
-  padding: 28px 28px 36px;
-  max-width: 496px;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 16px;
-  gap: 28px;
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 16px;
-  line-height: 20px;
-}*/
 .modal__content_form {
   background-color: #fff;
   position: relative;
@@ -72,6 +57,11 @@
   outline: none; /* remove default focus outline (optional) */
   padding: 4px 0; /* spacing for text */
   background: transparent;
+}
+.modal__button-row {
+  display: flex;
+  gap: 16px; /* space between buttons */
+  margin-top: 16px; /* optional spacing from inputs */
 }
 .modal__submit {
   width: 124px;

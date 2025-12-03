@@ -16,7 +16,13 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Profile from "../Profile/Profile";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import * as auth from "../../utils/auth";
 import { getToken } from "../../utils/token";
 
@@ -98,9 +104,18 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => setClothingItems(data))
+      .then((data) => {
+        const userId = currentUser?._id;
+
+        const itemsWithLikeStatus = data.map((item) => ({
+          ...item,
+          isLiked: userId ? item.likes?.includes(userId) : false,
+        }));
+
+        setClothingItems(itemsWithLikeStatus);
+      })
       .catch(console.error);
-  }, []);
+  }, [currentUser]);
 
   // ------------------------
   // AUTH HANDLERS
@@ -191,7 +206,7 @@ function App() {
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
 
-    //Optimistically update UI
+    // Optimistically update UI
     setClothingItems((cards) =>
       cards.map((item) =>
         item._id === id ? { ...item, isLiked: !isLiked } : item
@@ -199,27 +214,19 @@ function App() {
     );
 
     // Call API
-    const apiCall = !isLiked ? api.addCardLike : api.removeCardLike;
+    const apiCall = !isLiked ? addCardLike : removeCardLike;
 
-    apiCall(id, token)
-      .then((res) => {
-        // Update with server response
-        const updatedCard = res.data; // backend now returns isLiked
-        setClothingItems((cards) =>
-          cards.map((item) => (item._id === id ? updatedCard : item))
-        );
-      })
-      .catch((err) => {
-        console.error(err);
+    apiCall(id, token).catch((err) => {
+      console.error(err);
 
-        // If API fails, revert optimistic update
-        setClothingItems((cards) =>
-          cards.map((item) =>
-            item._id === id ? { ...item, isLiked: isLiked } : item
-          )
-        );
-        alert("Failed to update like. Please try again.");
-      });
+      // Revert optimistic update if API fails
+      setClothingItems((cards) =>
+        cards.map((item) =>
+          item._id === id ? { ...item, isLiked: isLiked } : item
+        )
+      );
+      alert("Failed to update like. Please try again.");
+    });
   };
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -234,7 +241,6 @@ function App() {
               handleLoginClick={handleLoginClick}
               weatherData={weatherData}
               loggedIn={loggedIn}
-              currentUser={currentUser}
             />
             <Routes>
               <Route
@@ -246,6 +252,7 @@ function App() {
                     onCardClick={handleCardClick}
                     onDeleteItem={handleDeleteItem}
                     onCardLike={handleCardLike}
+                    loggedIn={loggedIn}
                   />
                 }
               />
@@ -255,7 +262,6 @@ function App() {
                   <ProtectedRoute loggedIn={loggedIn}>
                     <Profile
                       clothingItems={clothingItems}
-                      currentUser={currentUser}
                       onCardClick={handleCardClick}
                       onCardLike={handleCardLike}
                       onAddNewClick={handleAddClick}
@@ -266,6 +272,7 @@ function App() {
                         setCurrentUser(null);
                         navigate("/");
                       }}
+                      onEditProfileClick={() => setIsEditProfileOpen(true)}
                     />
                   </ProtectedRoute>
                 }
@@ -291,19 +298,20 @@ function App() {
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onRegister={handleRegister}
+            onSwitchToLogin={() => setActiveModal("login")}
           />
 
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
+            onSwitchToRegister={() => setActiveModal("register")}
           />
-          {/* ✅ Edit Profile Modal */}
+          {/*Edit Profile Modal */}
           <EditProfileModal
             isOpen={isEditProfileOpen}
             onClose={() => setIsEditProfileOpen(false)}
             onUpdateUser={handleUpdateUser}
-            currentUser={currentUser}
           />
         </div>
       </CurrentUserContext.Provider>

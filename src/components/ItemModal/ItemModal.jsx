@@ -1,14 +1,14 @@
-import { useState, useContext } from "react"; // ✅ added useContext
+import { useState, useContext } from "react"; // added useContext
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 import "./ItemModal.css";
 import closeIcon from "../../assets/closeIcon_white.png";
-import CurrentUserContext from "../../contexts/CurrentUserContext.jsx"; // ✅ import the context
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx"; // import the context
 
 function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
   const isOpen = activeModal === "preview";
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
-  const currentUser = useContext(CurrentUserContext); // ✅ subscribe to current user
+  const currentUser = useContext(CurrentUserContext); // subscribe to current user
 
   const isOwn = currentUser?._id && card?.owner === currentUser._id;
   const itemDeleteButtonClassName = `modal__delete-button ${
@@ -44,7 +44,7 @@ function ItemModal({ activeModal, onClose, card = {}, onDeleteItem }) {
             <div className="modal__caption-container">
               <h2 className="modal__caption">{card.name || "Unnamed Item"}</h2>
 
-              {/* ✅ only show delete button if current user owns the item */}
+              {/* only show delete button if current user owns the item */}
               {isOwn && (
                 <button
                   className={itemDeleteButtonClassName}

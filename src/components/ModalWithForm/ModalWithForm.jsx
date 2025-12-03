@@ -10,6 +10,7 @@ function ModalWithForm({
   onClose,
   onSubmit,
   isSubmitDisabled = false,
+  extraButton, // ✅ added extraButton prop
 }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
@@ -20,15 +21,21 @@ function ModalWithForm({
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button
-            type="submit"
-            disabled={isSubmitDisabled}
-            className={`modal__submit ${
-              !isSubmitDisabled ? "modal__submit_ready" : ""
-            }`}
-          >
-            {buttonText}
-          </button>
+
+          {/* ✅ Buttons row: submit + extra button */}
+          <div className="modal__button-row">
+            <button
+              type="submit"
+              disabled={isSubmitDisabled}
+              className={`modal__submit ${
+                !isSubmitDisabled ? "modal__submit_ready" : ""
+              }`}
+            >
+              {buttonText}
+            </button>
+
+            {extraButton && extraButton}
+          </div>
         </form>
       </div>
     </div>

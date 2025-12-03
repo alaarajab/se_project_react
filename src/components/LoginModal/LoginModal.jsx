@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
-function LoginModal({ isOpen, onClose, onLogin }) {
+function LoginModal({ isOpen, onClose, onLogin, onSwitchToRegister }) {
   const defaultValues = { email: "", password: "" };
   const { values, handleChange, resetForm } = useForm(defaultValues);
 
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const wasOpen = useRef(false);
 
   useEffect(() => {
@@ -49,14 +49,24 @@ function LoginModal({ isOpen, onClose, onLogin }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
+      extraButton={
+        // ✅ Extra button for switching to Register modal
+        <button
+          type="button"
+          className="modal__switch-button"
+          onClick={onSwitchToRegister}
+        >
+          Or Sign Up
+        </button>
+      }
     >
       {/* Email */}
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="login-email" className="modal__label">
         Email
         <input
           type="email"
           name="email"
-          id="email"
+          id="login-email"
           className="modal__input"
           placeholder="you@example.com"
           value={values.email}
@@ -75,12 +85,12 @@ function LoginModal({ isOpen, onClose, onLogin }) {
       </label>
 
       {/* Password */}
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="login-password" className="modal__label">
         Password
         <input
           type="password"
           name="password"
-          id="password"
+          id="login-password"
           className="modal__input"
           placeholder="Password"
           value={values.password}
