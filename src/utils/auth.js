@@ -1,5 +1,6 @@
 import { getToken, setToken, removeToken } from "./token";
-import { checkResponse, baseUrl } from "./api";
+import { checkResponse } from "./api";
+import { baseUrl } from "./constants";
 
 export const register = ({ name, email, password, avatar }) => {
   return fetch(`${baseUrl}/signup`, {

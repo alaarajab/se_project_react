@@ -115,4 +115,8 @@ export const coordinates = {
   latitude: 42.019343935186775,
   longitude: -88.12886685386268,
 };
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr-wtwr.jumpingcrab.com"
+    : "http://localhost:3001";
 export const apiKey = "0e240ca5adff6cfa5d864f99eb3a00d5";

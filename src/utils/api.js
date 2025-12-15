@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:3001";
+import { baseUrl } from "./constants";
 export function checkResponse(res) {
   if (res.ok) {
     return res.json();
