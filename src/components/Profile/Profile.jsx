@@ -15,6 +15,7 @@ function Profile({
   onEditProfileClick,
 }) {
   const currentUser = useContext(CurrentUserContext);
+  const loggedIn = !!currentUser;
 
   return (
     <div className="profile">
@@ -32,6 +33,7 @@ function Profile({
         <ClothesSection
           clothingItems={clothingItems}
           currentUser={currentUser}
+          loggedIn={loggedIn}
           onCardClick={onCardClick}
           onAddNewClick={onAddNewClick}
           onCardLike={onCardLike}
