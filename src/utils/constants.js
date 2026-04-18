@@ -117,6 +117,6 @@ export const coordinates = {
 };
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://api.wtwr-wtwr.jumpingcrab.com"
+    ? "https://se-project-express-arzl.onrender.com"
     : "http://localhost:3001";
 export const apiKey = "0e240ca5adff6cfa5d864f99eb3a00d5";
