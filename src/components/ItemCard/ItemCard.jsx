@@ -1,6 +1,6 @@
 import "./ItemCard.css";
 import likeButton from "../../assets/likeButton.png";
-import unLikeButton from "../../assets/unlikeButton.png";
+import unLikeButton from "../../assets/UnlikeButton.png";
 
 function ItemCard({ item, onCardClick, onCardLike, loggedIn }) {
   const handleCardClick = () => {
